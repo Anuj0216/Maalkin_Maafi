@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You ❤️</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe5ec;
+            overflow: hidden; /* Prevents scrolling when button moves */
+            touch-action: manipulation; /* Optimizes for mobile tapping */
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            z-index: 10;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .gif-placeholder {
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column; /* Stacked for easier mobile tapping */
+            gap: 15px;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 80%;
+            transition: all 0.2s ease;
+            font-weight: bold;
+        }
+
+        #yesBtn {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #noBtn {
+            background-color: #f8f9fa;
+            color: #ff4d6d;
+            border: 2px solid #ff4d6d;
+            position: relative;
+        }
+
+        #successMessage {
+            display: none;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h2 { color: #590d22; }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="mainContainer">
+        <div class="gif-placeholder">🥺</div>
+        <h1 id="mainHeading">I'm so sorry... Maaf kardo na?</h1>
+        
+        <div class="buttons" id="btnGroup">
+            <button id="yesBtn" onclick="forgiven()">Maaf kardia</button>
+            <button id="noBtn" ontouchstart="moveButton()" onclick="moveButton()">Maaf nhi kiya</button>
+        </div>
+
+        <div id="successMessage">
+            <div style="font-size: 60px;">💖</div>
+            <h2>Yayyy! Thank you!</h2>
+            <p>I promise to make it up to you tomorrow! 😘</p>
+        </div>
+    </div>
+
+    <script>
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            
+            // Get screen dimensions minus button size
+            const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 40;
+            
+            // Calculate random positions
+            const newX = Math.floor(Math.random() * maxX);
+            const newY = Math.floor(Math.random() * maxY);
+            
+            noBtn.style.position = "fixed";
+            noBtn.style.left = newX + "px";
+            noBtn.style.top = newY + "px";
+            noBtn.style.zIndex = "999";
+        }
+
+        function forgiven() {
+            document.getElementById('mainHeading').style.display = 'none';
+            document.getElementById('btnGroup').style.display = 'none';
+            document.querySelector('.gif-placeholder').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'block';
+            
+            // Changing background to a celebration color
+            document.body.style.backgroundColor = "#ffb3c1";
+        }
+    </script>
+</body>
+</html>
